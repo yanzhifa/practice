@@ -23,6 +23,7 @@ public class CountDemo {
         System.out.println(count);
 
         list.forEach(l->{
+
             if(l.equalsIgnoreCase("D")) {
                 System.out.println("True");
             }
