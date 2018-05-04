@@ -31,7 +31,7 @@ public class BufferInterruptibly  implements IBuffer{
 
     public void read() throws InterruptedException{
         //System.out.println("pending read.");
-        //lock.lockInterruptibly();// 注意这里，可以响应中断
+        lock.lockInterruptibly();// 注意这里，可以响应中断
         try {
             readOut();
             //System.out.println("从这个buff读数据");

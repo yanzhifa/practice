@@ -24,5 +24,8 @@ public class ArrayDedup {
         String resetRootPasswordCommand = "(echo Testesx123! ; echo Testesx123!) | passwd";
         String command = "echo 'Testvxrail' | su root -c \"" + resetRootPasswordCommand + "\"";
         System.out.println(command);
+
+        int[] array = new int[arrays.length];
+
     }
 }
