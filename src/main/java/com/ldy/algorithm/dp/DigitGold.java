@@ -12,6 +12,12 @@ public class DigitGold {
     //maxGold[i][j]保存了i个人挖前j个金矿能够得到的最大金子数，等于-1时表示未知
     public int[][] maxGold = new int[max_people][max_n];
 
+    /**
+     * F(n,w) = 0 (n<=1, w<p[0]);
+     * F(n,w) = g[0] (n==1, w>=p[0]);
+     * F(n,w) = F(n-1,w) (n>1, w<p[n-1])
+     * F(n,w) = max(F(n-1,w), F(n-1,w-p[n-1])+g[n-1]) (n>1, w>=p[n-1])
+     */
     public int getMaxGold(int people, int mineNum) {
         int retMaxGold = 0;
         if (people <= 0) {
@@ -40,11 +46,11 @@ public class DigitGold {
 
     //n金矿数 w工人数 g[]金矿的产量 p[]需要的人数
     public static int getMostGold(int n, int w, int[] g, int[] p) {
-        int[] preRusults = new int[w];
-        int[] results = new int[w];
+        int[] preRusults = new int[w + 1];
+        int[] results = new int[w + 1];
 
         // loop for n of workers
-        for (int i = 0; i < w; i++) {
+        for (int i = 0; i <= w; i++) {
             if (i < p[0])
                 preRusults[i] = 0;
             else
@@ -52,9 +58,9 @@ public class DigitGold {
         }
 
         // loop for n of mines
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n - 1; ++i) {
             // loop for n of workers
-            for (int j = 1; j < w; j++) {
+            for (int j = 1; j <= w; j++) {
                 if (j < p[i])
                     results[j] = preRusults[j];
                 else
@@ -62,7 +68,7 @@ public class DigitGold {
             }
             preRusults = results;
         }
-        return results[w - 1];
+        return results[w];
     }
 
     public static void main(String[] args) {
@@ -72,6 +78,6 @@ public class DigitGold {
 
         int p[] = {5, 5, 3, 4, 3};
         int g[] = {400, 500, 200, 300, 350};
-        System.out.println(getMostGold(4, 10, g, p));
+        System.out.println(getMostGold(5, 10, g, p));
     }
 }

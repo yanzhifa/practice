@@ -1,5 +1,8 @@
 package com.ldy.algorithm;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by yanz3 on 4/26/18.
  */
@@ -27,6 +30,8 @@ public class QuickSort {
             }
 
         }
+
+        Map<String, String> map = new HashMap<>();
 
         array[left] = array[i];
         array[i] = temp;

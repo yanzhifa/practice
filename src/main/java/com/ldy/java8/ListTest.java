@@ -16,6 +16,17 @@ import static java.util.Collections.singleton;
  * Created by yanz3 on 5/24/17.
  */
 public class ListTest {
+
+    private int count;
+
+    private void hello1(int count){
+        this.count = count;
+    }
+
+    private void hello2(){
+        this.hello1(1);
+    }
+
     public static void main(String[] args) {
         List<String> stringList = new ArrayList<>();
         stringList.add("A");
@@ -56,5 +67,10 @@ public class ListTest {
         single.add("Two");
         System.out.println(single);
 
+
+    }
+
+    public static void hello() {
+        System.out.println("hello");
     }
 }

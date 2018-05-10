@@ -1,4 +1,4 @@
-package com.ldy.algorithm;
+package com.ldy.algorithm.tree;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by yanz3 on 5/3/18.
  */
-public class BTSearch {
+public class BTPath {
 
     static class Tree {
         public int x;

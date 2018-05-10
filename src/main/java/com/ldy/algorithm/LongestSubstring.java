@@ -12,7 +12,6 @@ public class LongestSubstring {
         int result = 0;
         int[] cache = new int[256];
         for (int i = 0, j = 0; i < s.length(); i++) {
-
             System.out.println(s.charAt(i) + ":" + cache[s.charAt(i)]);
             j = (cache[s.charAt(i)] > 0) ? Math.max(j, cache[s.charAt(i)]) : j;
             cache[s.charAt(i)] = i + 1;
