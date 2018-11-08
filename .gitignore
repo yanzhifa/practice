@@ -1,0 +1,17 @@
+.DS_Store
+build/
+.gradle/
+.idea/*
+*.iml
+.test
+out/
+bin/
+transaction-logs/
+application-local.properties
+application-local.yml
+.bpmn
+.project
+.settings
+.classpath
+contract-*.png
+

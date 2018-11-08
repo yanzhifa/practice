@@ -1,8 +1,10 @@
 package com.ldy.java8.stream;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,6 +13,7 @@ import java.util.stream.Stream;
  * Created by yanz3 on 11/7/16.
  */
 public class MatchElement {
+
     public static void main(String[] args) {
         Predicate<Integer> p = num -> num % 2 == 0;
         List<Integer> list = Arrays.asList(3, 5, 6);
@@ -87,9 +90,32 @@ public class MatchElement {
                 list7.stream().filter(obj -> obj == 5).findAny();
         System.out.println(result.isPresent());
 
-        boolean find = list7.parallelStream().anyMatch(integer -> integer==6 );
+        boolean find = list7.parallelStream().anyMatch(integer -> integer == 6);
         System.out.println(find);
 
+        List<A> aList = new ArrayList<>();
+        aList.add(new A("a"));
+        aList.add(new A("b"));
+        aList.add(new A("c"));
+
+        List<A> aList1 = aList.stream().map(a -> convert(a)).collect(Collectors.toList());
+        System.out.println(aList1.size());
+
+
+    }
+
+
+
+    static class A {
+        public A(String name) {
+            this.name = name;
+        }
+
+        String name;
+    }
+
+    private static A convert(A a) {
+        return null;
     }
 
 }
