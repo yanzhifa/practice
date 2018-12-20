@@ -9,9 +9,13 @@ public class ReflectPointTest1 {
 
     public static void main(String[] args) throws Exception {
         ReflectPoint rp = new ReflectPoint();
-        System.out.println(rp);
-        setSomeFields(rp);
-        System.out.println(rp);
+//        System.out.println(rp);
+//        getAllFields(rp);
+//        setSomeFields(rp);
+//        System.out.println(rp);
+
+        ReflectEntity re = new ReflectEntity();
+        getAllFields(re);
     }
 
     private static void setSomeFields(ReflectPoint rp) throws Exception {
@@ -30,8 +34,20 @@ public class ReflectPointTest1 {
         // TODO Auto-generated method stub
         Field[] fields = rp.getClass().getDeclaredFields();
         for (Field field : fields) {
+            System.out.println(field.getName());
             field.setAccessible(true);
             System.out.println(field.get(rp));
+        }
+    }
+
+    private static void getAllFields(ReflectEntity re) throws Exception {
+        // TODO Auto-generated method stub
+        Field[] fields = re.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+
+            System.out.println(field.getType());
+            System.out.println(field.getName() + ":" + field.getInt(re));
         }
     }
 }

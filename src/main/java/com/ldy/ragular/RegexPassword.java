@@ -1,6 +1,7 @@
 package com.ldy.ragular;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +16,7 @@ public class RegexPassword {
     private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
     private static final String USERNAME_PATTERN1 = "^[a-z_][a-z0-9_-]{2,31}[$]?";
     private static final String USERNAME_PATTERN2 = "^[a-zA-Z][a-zA-Z0-9]{2,31}$";
+    private static final String QUOTE = "^['|\"](.*)['|\"]$";
 
 
     public RegexPassword() {
@@ -64,7 +66,11 @@ public class RegexPassword {
 //        String[] reservedNames = "root,daemon,nfsnobody,dcui,vpxuser".split(",");
 //        System.out.println(ArrayUtils.contains(reservedNames, "vpxuser"));
 
-        System.out.println(checkForRepeatedCharacterViolation("tessstssss"));
+        //System.out.println(checkForRepeatedCharacterViolation("tessstssss"));
 
+
+        System.out.println("*asdf'as*".matches("(\\*).*(\\*)"));
+
+        System.out.println(StringUtils.startsWith("\"str","\""));
      }
 }
