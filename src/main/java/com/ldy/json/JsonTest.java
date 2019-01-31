@@ -15,6 +15,8 @@ public class JsonTest {
         JsonTest test = new JsonTest();
         Entity e = test.new Entity();
         e.setId("12345");
+        e.setaFloat(1.5f);
+//        e.setbFloat(2.6f);
         // e.setType(Type.A);
 
         Map<String, String> map = new HashMap<>();
@@ -34,6 +36,11 @@ public class JsonTest {
         for (Field fs : f) {
             fs.setAccessible(true);
             System.out.println(fs.getName() + ":" + fs.getType());
+            if(fs.getType().equals(Float.class)) {
+                Float aFloat  = (Float)fs.get(e);
+                System.out.println(aFloat);
+            }
+
         }
         System.out.println(f);
 
@@ -74,6 +81,8 @@ public class JsonTest {
     }
 
     class Entity {
+        Float aFloat;
+//        float bFloat;
         String id;
         Type type;
         Map<String, String> map = new HashMap<>();
@@ -102,5 +111,20 @@ public class JsonTest {
             this.type = type;
         }
 
+        public Float getaFloat() {
+            return aFloat;
+        }
+
+        public void setaFloat(Float aFloat) {
+            this.aFloat = aFloat;
+        }
+
+//        public float getbFloat() {
+//            return bFloat;
+//        }
+//
+//        public void setbFloat(float bFloat) {
+//            this.bFloat = bFloat;
+//        }
     }
 }

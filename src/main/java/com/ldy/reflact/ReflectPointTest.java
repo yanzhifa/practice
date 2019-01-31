@@ -9,8 +9,8 @@ public class ReflectPointTest {
     public static void main(String[] args) throws Exception {
         ReflectPoint rp = new ReflectPoint();
         System.out.println(rp);
-//        setSomeFields(rp);
-//        System.out.println(rp);
+        setSomeFields(rp);
+        System.out.println(rp);
     }
 
     private static void setSomeFields(ReflectPoint rp) throws Exception {

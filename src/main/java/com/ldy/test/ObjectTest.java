@@ -29,6 +29,7 @@ public class ObjectTest {
         System.out.println(ps);
         List<Persons> personsList = new ArrayList<>();
         personsList.add(new Persons(new Person("11",1), new Person("2",2)));
+        System.out.println(personsList);
         personsList.forEach(persons -> {
             persons.setBoy(ps.getBoy());
             persons.setGirl(ps.getGirl());

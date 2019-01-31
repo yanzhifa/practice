@@ -1,5 +1,6 @@
 package com.ldy.java8.stream;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -94,16 +95,43 @@ public class MatchElement {
         System.out.println(find);
 
         List<A> aList = new ArrayList<>();
-        aList.add(new A("a"));
-        aList.add(new A("b"));
-        aList.add(new A("c"));
 
-        List<A> aList1 = aList.stream().map(a -> convert(a)).collect(Collectors.toList());
-        System.out.println(aList1.size());
+        for (int i = 0; i < 10000; i++) {
+            aList.add(new A("a" + i));
+        }
+//        aList.add(new A("b"));
+//        aList.add(new A("c"));
+
+//        List<A> aList1 = aList.stream().map(a -> convert(a)).collect(Collectors.toList());
+//        System.out.println(aList1.size());
+        System.out.println("====================================");
+        System.out.println("List size: "+aList.size());
+        System.out.println(System.currentTimeMillis() + "============");
+        long test = aList.stream().filter(a -> a.name.equals("a1")).count();
+        System.out.println(test);
+        System.out.println(System.currentTimeMillis() + "============");
+
+        System.out.println("====================================");
+
+        System.out.println(System.currentTimeMillis() + "============");
+        long test1 = aList.parallelStream().filter(a -> a.name.equals("a1")).count();
+        System.out.println(test1);
+        System.out.println(System.currentTimeMillis() + "============");
+
+        System.out.println("====================================");
+
+        System.out.println(System.currentTimeMillis() + "============");
+        for(A a : aList) {
+            if(a.name.equals("a1")) {
+                System.out.println("a1");
+            }
+        }
+        System.out.println(System.currentTimeMillis() + "============");
+
+
 
 
     }
-
 
 
     static class A {
@@ -112,6 +140,13 @@ public class MatchElement {
         }
 
         String name;
+
+        @Override
+        public String toString() {
+            return "A{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
 
     private static A convert(A a) {

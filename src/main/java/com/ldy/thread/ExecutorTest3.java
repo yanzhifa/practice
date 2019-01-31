@@ -8,8 +8,8 @@ public class ExecutorTest3 {
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        ExecutorService service = Executors.newFixedThreadPool(1);
-        service.submit(() -> {
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        Future future = service.submit(() -> {
             try {
                 System.out.println("start...");
                 Thread.sleep(5000);
@@ -17,8 +17,12 @@ public class ExecutorTest3 {
             } catch (Exception ex) {
             }
         });
-        service.shutdown();
-        service.awaitTermination(4,TimeUnit.SECONDS);
+        //service.shutdown();
+        System.out.println(service.isTerminated());
+        service.awaitTermination(10,TimeUnit.SECONDS);
+        System.out.println(future.isDone());
+        System.out.println(future.get());
+        System.out.println(service.isTerminated());
         System.out.println("over....");
     }
 }

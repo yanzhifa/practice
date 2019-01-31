@@ -58,11 +58,11 @@ class MyTestClass2 {
         this.forgetThisField = forgetThisField;
     }
 
-    @Override
-    public String toString() {
-        return "MyTestClass [" + this.id + " , " + this.name + ", " + this.notInterstingMember + ", "
-                + this.anotherMember + ", " + this.forgetThisField + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "MyTestClass [" + this.id + " , " + this.name + ", " + this.notInterstingMember + ", "
+//                + this.anotherMember + ", " + this.forgetThisField + "]";
+//    }
 
 }
 
