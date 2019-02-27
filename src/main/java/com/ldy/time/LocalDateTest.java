@@ -2,10 +2,13 @@ package com.ldy.time;
 
 import java.text.SimpleDateFormat;
 import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -20,6 +23,11 @@ public class LocalDateTest {
         LocalDate localDate = LocalDate.now(Clock.systemUTC());
         LocalDateTime localDateTime = LocalDateTime.now(Clock.systemUTC());
 
+        System.out.println(Instant.now());
+        System.out.println(LocalDateTime.now());
+        System.out.println(OffsetDateTime.now(Clock.system(ZoneId.of("UTC+2"))));
+        System.out.println(ZonedDateTime.now());
+        System.out.println("------------------------");
         System.out.println(Clock.systemUTC().instant());
         System.out.println(Clock.systemUTC().millis());
         System.out.println(localDate);
@@ -49,6 +57,24 @@ public class LocalDateTest {
 
         final SimpleDateFormat sdf =
                 new SimpleDateFormat("EEE, d MMM yyyy hh:mm:ss z");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        System.out.println(OffsetDateTime.parse("2018-12-19T00:00:00.000+00:00").toLocalDate() + "----------");
+
+        System.out.println(OffsetDateTime.parse("2018-12-19T00:00:00.000+01:00").withOffsetSameInstant(ZoneOffset.UTC).toLocalDate() + "----------");
+
+        System.out.println(OffsetDateTime.parse("2018-12-19T00:00:00.000+08:00", DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneOffset.UTC))+ "----------");
+        System.out.println(OffsetDateTime.parse("2018-12-19T00:00:00.000+08:00", DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneOffset.UTC)).toLocalDate()+ "----------");
+        System.out.println(OffsetDateTime.parse(OffsetDateTime.now().toString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneOffset.UTC))+ "----------");
+
+        System.out.println(ZonedDateTime.parse("2016-08-17T22:00:00+02:00").withZoneSameInstant(ZoneId.of("UTC")));
+        System.out.println(ZonedDateTime.parse("2018-12-19T00:00:00.000+01:00").withZoneSameInstant(ZoneId.of("UTC")));
+
+        OffsetDateTime utc = OffsetDateTime.now();
+        System.out.println(utc);
+        LocalDateTime localDateTime1 = LocalDateTime.now(ZoneOffset.UTC);
+        System.out.println(localDateTime1);
+
 
         DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm:ss").withZone(ZoneId.of("GMT"));
 
