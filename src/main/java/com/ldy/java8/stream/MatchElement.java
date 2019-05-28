@@ -3,8 +3,10 @@ package com.ldy.java8.stream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -129,7 +131,15 @@ public class MatchElement {
         System.out.println(System.currentTimeMillis() + "============");
 
 
-
+        List<String> strings = Arrays.asList("a","b",null);
+        List<String> strings2 = Arrays.asList("a","b");
+        Set<String> stringSet = new HashSet<>();
+        for(String s : strings) {
+            stringSet.add(s);
+        }
+//        Set<String> stringSet = strings.stream().map(s -> s).collect(Collectors.toSet());
+        System.out.println(stringSet);
+        System.out.println(strings.containsAll(strings2));
 
     }
 

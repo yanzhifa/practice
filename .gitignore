@@ -14,4 +14,4 @@ application-local.yml
 .settings
 .classpath
 contract-*.png
-
+target/

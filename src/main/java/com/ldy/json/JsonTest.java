@@ -26,6 +26,8 @@ public class JsonTest {
         map.put("4", "444");
         e.setMap(map);
 
+        System.out.println(new JSONObject(map));
+
         JSONObject json = new JSONObject(map);
         json.put("id", e.getId());
         json.put("type", e.getType());
@@ -47,7 +49,7 @@ public class JsonTest {
         Method m1 = e.getClass().getMethod("setType", Class.forName("com.ldy.json.Type"));
         System.out.println(m1.getName());
 
-        m1.invoke(e, Type.A);
+        m1.invoke(e, Type.MANAGEMENT);
         System.out.println("-------------");
         System.out.println(e.getType());
         System.out.println("-------------");

@@ -41,10 +41,13 @@ public class ComparatorDemo {
         st1.add("1");
         st1.add("2");
         st1.add("3");
+        st1.add("4");
 
         st2.add("1");
-        st2.add("22");
-        st2.add("33");
+        st2.add("2");
+        st2.add("3");
+
+        System.out.println(st2.containsAll(st1));
 
         st1.contains("2");
 

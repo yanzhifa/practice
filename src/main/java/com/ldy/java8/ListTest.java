@@ -1,5 +1,7 @@
 package com.ldy.java8;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -62,10 +64,22 @@ public class ListTest {
         Set<String> single = new HashSet<String>();
         System.out.println(Collections.singleton("One"));
 //        single.addAll(Collections.singleton("One"));
-        single = Collections.singleton("One");
+//        single = Collections.singleton("One");
         System.out.println(single);
         single.add("Two");
         System.out.println(single);
+
+        single.remove(null);
+
+        List<String> s = new ArrayList<>();
+        s.add("one");
+        s.add("two");
+        s.add("three");
+
+        String step1 = StringUtils.join(s, "\", \"");// Join with ", "
+        System.out.println(step1);
+        String step2 = StringUtils.wrap(step1, "\"");// Wrap step1 with "
+        System.out.println(step2);
 
 
     }

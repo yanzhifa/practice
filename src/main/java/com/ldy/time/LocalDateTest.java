@@ -1,10 +1,13 @@
 package com.ldy.time;
 
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.time.Clock;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.YearMonth;
 import java.time.ZoneId;
@@ -20,6 +23,11 @@ import java.util.concurrent.TimeUnit;
 public class LocalDateTest {
 
     public static void main(String[] args) {
+        long masterDataSyncInterval = 365 * 24 * 3600 * 1000L;
+        long a = 365 * 24 *1000*360L;
+        System.out.println(masterDataSyncInterval);
+        System.out.println(Long.MAX_VALUE);
+
         LocalDate localDate = LocalDate.now(Clock.systemUTC());
         LocalDateTime localDateTime = LocalDateTime.now(Clock.systemUTC());
 
@@ -34,11 +42,18 @@ public class LocalDateTest {
         System.out.println(localDateTime);
         System.out.println(localDate.plusMonths(1).withDayOfMonth(1));
 
+        System.out.println("------------------");
+        System.out.println(localDate.plusDays(10).getMonth() == localDate.getMonth());
+        System.out.println(localDate.plusDays(10).withDayOfMonth(1));
+        System.out.println("------------------");
+
         String[] strings = {null, null};
         System.out.println(strings.length);
 
         YearMonth date = YearMonth.from(localDate);
         System.out.println(date.toString());
+        System.out.println(YearMonth.of(date.getYear(),date.getMonth().minus(1)));
+        System.out.println(date.isAfter(YearMonth.of(date.getYear(),date.getMonth().minus(1))));
 
 
         System.out.println(TimeUnit.DAYS.toMillis(1));
@@ -103,5 +118,12 @@ public class LocalDateTest {
     private static void m1(String str1, String... str2) {
         System.out.println(str1 + ":" + str2.length);
 
+    }
+
+    private static void updateClock() {
+        LocalDate effectiveDate = LocalDate.now(Clock.systemUTC()).plusDays(10);
+        LocalDateTime localDateTime2 = LocalDateTime.of(effectiveDate, LocalTime.now(Clock.systemUTC()));
+        long offset = localDateTime2.toInstant(ZoneOffset.UTC).toEpochMilli() - System.currentTimeMillis();
+        Clock.offset(Clock.systemUTC(), Duration.ofMillis(offset));
     }
 }
