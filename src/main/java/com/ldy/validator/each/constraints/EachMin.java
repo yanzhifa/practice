@@ -5,6 +5,7 @@ import com.ldy.validator.each.EachValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.ReportAsSingleViolation;
 import javax.validation.constraints.Min;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -23,6 +24,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({METHOD, FIELD, ANNOTATION_TYPE})
 @EachNotNull
+@ReportAsSingleViolation
 @EachConstraint(validateAs = Min.class)
 @Constraint(validatedBy = EachValidator.class)
 public @interface EachMin {

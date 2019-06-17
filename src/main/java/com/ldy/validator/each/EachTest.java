@@ -1,5 +1,6 @@
 package com.ldy.validator.each;
 
+import com.ldy.validator.each.constraints.CollectionConstraint;
 import com.ldy.validator.each.constraints.EachLength;
 import com.ldy.validator.each.constraints.EachMax;
 import com.ldy.validator.each.constraints.EachMin;
@@ -7,6 +8,7 @@ import com.ldy.validator.each.constraints.EachNotEmpty;
 import com.ldy.validator.each.constraints.EachSize;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -21,16 +23,20 @@ import java.util.Set;
 public class EachTest {
 
 //    @EachLength(min = 3, max = 10)
+    @CollectionConstraint(size = @Size(min = 3, max = 10))
     List<String> strings;
 
-    @EachSize(min = 4, max = 11)
+
+
+
+//    @EachSize(min = 4, max = 11)
     List<String> string1s;
 
 //    @EachLength(min = 5, max = 8)
 //    @EachSize(min = 3, max = 5)
     List<List<String>> lists;
 
-//    @EachMin(value = 3)
+//    @EachMin(value = 3, message = "it's small than {value}")
 //    @EachMax(value = 9)
     List<Integer> integers;
 
@@ -38,15 +44,22 @@ public class EachTest {
 //    @Size(min = 2, max = 5)
     String name;
 
-    @EachNotEmpty
+//    @EachNotEmpty
     List<String> testL1;
-
+    static boolean b;
     public static void main(String[] args) {
+
+
+        System.out.println(b);
+
+        Integer[] aa = new Integer[10];
+        System.out.println(aa[2]);
+
         EachTest eachTest = new EachTest();
         List<String> strings = new ArrayList<>();
         strings.add("1");
         strings.add("123");
-        strings.add(null);
+        strings.add("2");
         eachTest.setStrings(strings);
         eachTest.setName("a");
 
@@ -56,8 +69,8 @@ public class EachTest {
         eachTest.setLists(lists);
 
         List<String> string1s = new ArrayList<>();
-        string1s.add("31111111");
         string1s.add(null);
+        string1s.add("31111111");
         string1s.add(null);
         eachTest.setString1s(string1s);
 
@@ -68,6 +81,8 @@ public class EachTest {
 
         List<Integer> integers = new ArrayList<>();
         integers.add(2);
+        integers.add(2);
+        integers.add(2);
         integers.add(10);
         eachTest.setIntegers(integers);
 
@@ -77,6 +92,7 @@ public class EachTest {
         for (ConstraintViolation<EachTest> constraintViolation : set) {
             System.out.println(constraintViolation.getMessage());
         }
+        System.out.println(set.size());
     }
 
 }

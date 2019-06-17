@@ -44,7 +44,7 @@ public class EachValidator implements ConstraintValidator<Annotation, Collection
     // after initialization it's read-only
     private Map<Class, Class<? extends ConstraintValidator<?, ?>>> validators;
 
-    // modifiable after initialization; must be thread-safe!
+    // modifiable after initialization
     private Map<Class, ConstraintValidator> validatorInstances;
 
     @Override
@@ -70,6 +70,7 @@ public class EachValidator implements ConstraintValidator<Annotation, Collection
         if (collection == null || collection.isEmpty()) {
             return true;  //nothing to validate here
         }
+        context.disableDefaultConstraintViolation();  //do not add wrapper's message
 
         int index = 0;
         for (Iterator<?> it = collection.iterator(); it.hasNext(); index++) {
@@ -132,7 +133,6 @@ public class EachValidator implements ConstraintValidator<Annotation, Collection
      */
     protected ConstraintValidator getValidatorInstance(Class<?> type) {
         ConstraintValidator validator = validatorInstances.get(type);
-
         if (validator == null) {
             validator = findAndInitializeValidator(type);
             validatorInstances.put(type, validator);
@@ -141,7 +141,6 @@ public class EachValidator implements ConstraintValidator<Annotation, Collection
     }
 
     protected ConstraintValidator getAnyValidatorInstance() {
-
         if (validatorInstances.isEmpty()) {
             Class type = validators.keySet().iterator().next();
             return findAndInitializeValidator(type);
@@ -153,7 +152,6 @@ public class EachValidator implements ConstraintValidator<Annotation, Collection
 
     protected ConstraintValidator findAndInitializeValidator(Class<?> type) {
         log.trace("Looking for validator for type: {}", type.getName());
-
         for (Class<?> clazz : validators.keySet()) {
             if (clazz.isAssignableFrom(type)) {
 
@@ -165,7 +163,6 @@ public class EachValidator implements ConstraintValidator<Annotation, Collection
         }
         throw new IllegalArgumentException("No validator found for type: " + type.getName());
     }
-
 
     /**
      * Instantiates constraint of the specified type and copies values of all
